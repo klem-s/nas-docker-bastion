@@ -1,0 +1,14 @@
+services:
+  # ─────────────────────────────────────────
+  #  CLOUDFLARED – Tunnel Cloudflare
+  # ─────────────────────────────────────────
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TOKEN}
+    restart: unless-stopped
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
